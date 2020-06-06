@@ -6,109 +6,104 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
 } from 'react-native';
+import ACTION_BUTTON_DATA from './mock/ACTION_BUTTON_DATA';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const {width: DEVICE_WIDTH} = Dimensions.get('screen');
 
-const App: () => React$Node = () => {
+const actionIcon = require('./app/assets/images/grader-action.png');
+
+const ActionButton = ({data, setSelected}) => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <TouchableOpacity
+      onPress={() => {
+        setSelected(data.name);
+      }}
+      activeOpacity={0.6}
+      style={[
+        styles.actionContainer,
+        {
+          backgroundColor: data.bgColor,
+        },
+      ]}>
+      <Image style={styles.actionImage} source={actionIcon} />
+      <Text style={styles.actionText}>{data.name}</Text>
+    </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+const App = () => {
+  const [selected, setSelected] = useState('');
+  return (
+    <SafeAreaView style={styles.root}>
+      <View style={styles.container}>
+        <View style={styles.cardsList}>
+          {ACTION_BUTTON_DATA.map((action, index) => {
+            return (
+              <ActionButton
+                key={index}
+                data={action}
+                setSelected={setSelected}
+              />
+            );
+          })}
+        </View>
+
+        <Text style={styles.selectedValue}>{selected}</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default App;
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+
+  actionContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#EF867E',
+    width: (DEVICE_WIDTH - 50) / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+    borderRadius: 12,
+    marginVertical: 7,
+  },
+  actionImage: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+  cardsList: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  actionText: {
+    color: 'white',
+    fontWeight: '600',
+  },
+  selectedValue: {
+    textAlign: 'center',
+    marginBottom: 30,
+    fontSize: 30,
+    fontWeight: '700',
+  },
+});
