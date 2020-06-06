@@ -15,15 +15,12 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import ACTION_BUTTON_DATA from './mock/ACTION_BUTTON_DATA';
 
-import ACTION_TEXT_DATA from './mock/ACTION_TEXT_DATA';
-
 const {width: DEVICE_WIDTH} = Dimensions.get('screen');
 
-const actionIcon = require('./assets/images/grader-action.png');
+const actionIcon = require('./app/assets/images/grader-action.png');
 
 const ActionButton = ({data, setSelected}) => {
   return (
@@ -44,26 +41,6 @@ const ActionButton = ({data, setSelected}) => {
   );
 };
 
-const ActionText = ({data}) => {
-  return (
-    <TouchableOpacity style={styles.actContainer}>
-    <Text style={styles.actText}>{data.line1}</Text>
-    <Button style={styles.actButton} title="Select Me"></Button>
-    </TouchableOpacity>
-    );
-};
-
-
-
-
-
-
-
-
-
-
-
-
 const App = () => {
   const [selected, setSelected] = useState('');
   return (
@@ -79,17 +56,7 @@ const App = () => {
               />
             );
           })}
-        {ACTION_TEXT_DATA.map((action, index) => {
-            return (
-              <ActionText
-                key={index}
-                data={action}
-                setSelected={setSelected}
-              />
-            );
-          })}
         </View>
-        
 
         <Text style={styles.selectedValue}>{selected}</Text>
       </View>
@@ -139,28 +106,4 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
   },
-  actContainer: {
-    marginTop:20,
-    width:330,
-    borderWidth:1,
-    borderColor:'#a9a9a9',
-    borderRadius:12,
-    height:50,
-    marginLeft:10,
-    flexDirection:'row',
-    justifyContent:"space-between",
-    paddingRight:10,
-    alignSelf:"center",
-    alignItems:"center"
-  },
-  actText:{
-    fontWeight:'bold',
-    marginRight:50,
-    fontSize:16,
-
-  },
-  actButton:{
-    color:'#ff23ef',
-    
-  }
 });
