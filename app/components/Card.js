@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, Dimensions } from 'react-native';
 const { width: DEVICE_WIDTH } = Dimensions.get('screen');
+import ACTION_CARD_DATA from '../components/ACTION_CARD_DATA'
 
 
-const Card = ({ image, title, subtitle, cost }) => {
+
+const Card = ({ data }) => {
     return (
         <View style={styles.root}>
-            <Image style={styles.cardimg} source={image}></Image>
-            <Text style={styles.cardtext}>{title}</Text>
-            <Text style={[styles.cardtext, styles.cardsubtext]}>{subtitle}</Text>
-            <Text style={styles.cardtext}>{cost}</Text>
+            <Image style={styles.cardimg} source={data.image}></Image>
+            <Text style={styles.cardtext}>{data.title}</Text>
+            <Text style={[styles.cardtext, styles.cardsubtext]}>{data.subtitle}</Text>
+            <Text style={styles.cardtext}>{data.cost}</Text>
 
         </View>
     );
@@ -23,6 +25,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         paddingBottom: 7,
         width: (((DEVICE_WIDTH - 30) / 2) - 10),
+        marginVertical: 7,
+
+
     },
     cardimg: {
         maxHeight: 200,
