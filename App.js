@@ -41,6 +41,29 @@ const ActionButton = ({data, setSelected}) => {
   );
 };
 
+const TestListItem = ({title, subtitle, disabled}) => {
+  return (
+    <View style={styles.testContainer}>
+      <View>
+        <Text
+          style={[
+            styles.test,
+            {
+              color: disabled ? 'red' : 'black',
+            },
+          ]}>
+          {title}
+        </Text>
+        <Text style={styles.subtest}>{subtitle}</Text>
+      </View>
+
+      <View style={styles.retake}>
+        <Text style={styles.retakeTest}>Retake Test</Text>
+      </View>
+    </View>
+  );
+};
+
 const App = () => {
   const [selected, setSelected] = useState('');
   return (
@@ -57,8 +80,22 @@ const App = () => {
             );
           })}
         </View>
+        <Text style={styles.mainTitle}>Practice, Perform, Perfect!</Text>
 
-        <Text style={styles.selectedValue}>{selected}</Text>
+        <TestListItem
+          title="Cost Accounting Fundamental"
+          subtitle="Last taken on 12 April 2019"
+          disabled={true}
+        />
+        <TestListItem
+          title="Fixed Asset Accounting"
+          subtitle="Last taken on 12 April 2019"
+          disabled={true}
+        />
+        <TestListItem
+          title="Non profit Accounting"
+          subtitle="Last taken on 12 April 2019"
+        />
       </View>
     </SafeAreaView>
   );
@@ -91,7 +128,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   cardsList: {
-    flex: 1,
+    flex: 0.5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -99,6 +136,43 @@ const styles = StyleSheet.create({
   actionText: {
     color: 'white',
     fontWeight: '600',
+  },
+  testContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  test: {
+    color: 'black',
+    fontWeight: '900',
+    fontSize: 16,
+    paddingBottom: 7,
+  },
+  subtest: {
+    color: 'grey',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  retake: {
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 35,
+    borderColor: 'orange',
+    borderWidth: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxWidth: 150,
+    marginLeft: 15,
+  },
+  retakeTest: {
+    color: 'orange',
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  mainTitle: {
+    fontSize: 18,
+    marginVertical: 20,
+    fontWeight: '700',
   },
   selectedValue: {
     textAlign: 'center',
