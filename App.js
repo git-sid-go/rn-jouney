@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -18,11 +18,11 @@ import {
 } from 'react-native';
 import ACTION_BUTTON_DATA from './mock/ACTION_BUTTON_DATA';
 
-const {width: DEVICE_WIDTH} = Dimensions.get('screen');
+const { width: DEVICE_WIDTH } = Dimensions.get('screen');
 
 const actionIcon = require('./app/assets/images/grader-action.png');
 
-const ActionButton = ({data, setSelected}) => {
+const ActionButton = ({ data, setSelected }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -41,7 +41,7 @@ const ActionButton = ({data, setSelected}) => {
   );
 };
 
-const TestListItem = ({title, subtitle, disabled}) => {
+const TestListItem = ({ title, subtitle, disabled }) => {
   return (
     <View style={styles.testContainer}>
       <View>

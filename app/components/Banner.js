@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
-const Banner = ({image, title, subtitle}) => {
+const Banner = ({ image, title, subtitle }) => {
   return (
     <View style={styles.root}>
       <Image style={styles.img} source={image} />
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'flex-end',
     overflow: 'hidden',
+    marginBottom: 20
   },
   text: {
     color: 'white',
