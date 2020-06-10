@@ -5,15 +5,19 @@ import ACTION_CARD_DATA from '../components/ACTION_CARD_DATA'
 
 
 
-const Card = ({ data }) => {
+const Card = ({ data, position }) => {
     return (
-        <View style={styles.root}>
+        <View style={[styles.root, {
+            marginLeft: position % 2 === 1 ? 15 : 0,
+
+
+        },]}>
             <Image style={styles.cardimg} source={data.image}></Image>
             <Text style={styles.cardtext}>{data.title}</Text>
             <Text style={[styles.cardtext, styles.cardsubtext]}>{data.subtitle}</Text>
             <Text style={styles.cardtext}>{data.cost}</Text>
 
-        </View>
+        </View >
     );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, StyleSheet, Dimensions } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Dimensions, FlatList } from 'react-native';
 import Banner from '../components/Banner';
 import Card from '../components/Card';
 import ACTION_CARD_DATA from '../components/ACTION_CARD_DATA'
@@ -19,12 +19,12 @@ const HeyHome = () => {
     <SafeAreaView>
       <View style={styles.root}>
 
-        <Banner
+        {/* <Banner
           image={bannerImg}
           title="Get 40% Off"
           subtitle="on all youtuber shoutouts"
-        />
-        <View style={styles.cardroot}>
+        /> */}
+        {/* <View style={styles.cardroot}>
           {ACTION_CARD_DATA.map((action, index) => {
             return (
               <Card
@@ -34,7 +34,16 @@ const HeyHome = () => {
             );
           })}
 
-        </View>
+        </View> */}
+        <FlatList data={ACTION_CARD_DATA} renderItem={({ item, index }) => <Card data={item} position={index} />} numColumns={2}
+          ListHeaderComponent={() => <Banner image={bannerImg}
+            title="Get 40% Off"
+            subtitle="on all youtuber shoutouts" />}
+          ListFooterComponent={() => <Banner image={bannerImg}
+            title="Get 40% Off"
+            subtitle="on all youtuber shoutouts" />}
+          stickyHeaderIndices={[0]} />
+
       </View>
 
 
