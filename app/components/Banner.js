@@ -1,13 +1,17 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const Banner = ({ image, title, subtitle }) => {
+const Banner = ({image, title, subtitle, navigation}) => {
   return (
-    <View style={styles.root}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Exams');
+      }}
+      style={styles.root}>
       <Image style={styles.img} source={image} />
       <Text style={[styles.text, styles.boldText]}>{title}</Text>
       <Text style={styles.text}>{subtitle}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'flex-end',
     overflow: 'hidden',
-    marginBottom: 20
+    marginBottom: 20,
   },
   text: {
     color: 'white',
